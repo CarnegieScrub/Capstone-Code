@@ -26,6 +26,7 @@ Project Structure:
    - Functions:
      - initializeRFID(): Configures RFID hardware for operation.
      - checkForTag(): Polls the RFID reader for new tags or button press events and triggers actions accordingly.
+     - triggeredCommunication(): Handles if a proper trigger was initialized based on preferences
 
 5. Preferences Manager (Preferences.cpp / Preferences.h)
    - Description: Manages user preferences and emergency contact information storage and retrieval.

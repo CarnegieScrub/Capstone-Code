@@ -7,6 +7,7 @@ public:
     void initializeCellular();
     void sendSMS();
     void makeCall();
+    void sendCELLTrigger(std::string TriggerInfo);
 };
 
 #endif // CELL_CONNECT_H

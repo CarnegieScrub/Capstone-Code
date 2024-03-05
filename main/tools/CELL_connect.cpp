@@ -1,4 +1,6 @@
 #include "CELL_connect.h"
+#include <stdlib.h>
+#include <string>
 
 CELLConnect::CELLConnect() {
     // Constructor code here (if necessary)
@@ -14,4 +16,8 @@ void CELLConnect::sendSMS() {
 
 void CELLConnect::makeCall() {
     // Initiates a voice call to a pre-configured emergency contact
+}
+
+void sendCELLTrigger(std::string TriggerInfo){
+    // sends proper cell trigger 
 }

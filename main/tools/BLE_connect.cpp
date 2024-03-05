@@ -99,10 +99,10 @@ void BLEConnect::handleConnection() {
 }
 
 
-void BLEConnect::sendTrigger() {
+void BLEConnect::sendBLETrigger(std::string TriggerInfo) {
     if(deviceConnected){
-        std::string msg = checkPreferencesBT(); // this needs to reply with something prob
-        pCharacteristic->setValue(msg.c_str());
+        std::string AppMsg = checkPreferencesBT(TriggerInfo); // this needs to reply with something prob
+        pCharacteristic->setValue(AppMsg.c_str());
         pCharacteristic->notify();
     } else switchToCell(); // if device disconnected after check send over cell?
     // Sends trigger information to the mobile app when an RFID event is detected

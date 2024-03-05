@@ -40,6 +40,16 @@ Project Structure:
      - formatMessage(): Formats messages for sending over cellular or BLE.
      - logError(): Utility function for logging errors to a central place, which could be serial output or external storage.
 
+7. CPU Module (CPU.cpp / CPU.h)
+   - Description: Manages system-level functions including power management, system health monitoring, and other CPU-specific tasks.
+   - Functions:
+     - initializeCPU(): Sets up any initial configurations specific to the CPU, such as clock speeds or power modes.
+     - checkBatteryLevel(): Returns the current battery level as a percentage. This function can be used to trigger low battery notifications or actions.
+     - enterLowPowerMode(): Puts the device into a low-power state to conserve battery when idle or upon certain conditions.
+     - exitLowPowerMode(): Wakes the device from low-power state in response to an event, like an RFID scan or a BLE connection request.
+     - monitorSystemHealth(): Periodically checks the system's health and functionality, ensuring everything is operating within expected parameters.
+
+
 Directory Structure:
 - /src: Contains the source files (.cpp) and header files (.h) for the project.
   - /src/main.ino: Main Arduino sketch.
@@ -53,6 +63,8 @@ Directory Structure:
   - /src/Preferences.h: Header for preferences management.
   - /src/Utils.cpp: Utility functions implementation.
   - /src/Utils.h: Header for utility functions.
+  - /src/CPU.cpp: Utility functions implementation.
+  - /src/CPU.h: Header for utility functions.
 
 Development Notes:
 - Non-Volatile Storage: Consider using ESP32's NVS (Non-Volatile Storage) library for storing preferences and emergency contacts. This ensures data persistence across reboots.

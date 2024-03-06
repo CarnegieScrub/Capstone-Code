@@ -1,8 +1,14 @@
-#include "BLE_connect.h"
+#include "CPU.h"    // Pendant main CPU code
+#include "Preferences.h"   // SOS contacts and Trigger Preferences code
+#include "Utils.h"   // Utility/helper function code
+#include "BLE_connect.h"    // Pendant -> Mobile App communication
+#include "CELL_connect.h"   // Pendant -> Cellular communication
+#include "RFID_connect.h"   // Ring -> Pendent RFID communication
 #include <BLEDevice.h>
 #include <BLEServer.h>
 #include <BLEUtils.h>
 #include <BLE2902.h>
+#include <string>
 
 BLEServer* pServer = NULL;
 BLECharacteristic* pCharacteristic = NULL;

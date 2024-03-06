@@ -1,7 +1,14 @@
-#include "CELL_connect.h"
 #include <stdlib.h>
 #include <string>
 #include <Preferences.h>
+#include "CPU.h"    // Pendant main CPU code
+#include "Preferences.h"   // SOS contacts and Trigger Preferences code
+#include "Utils.h"   // Utility/helper function code
+#include "BLE_connect.h"    // Pendant -> Mobile App communication
+#include "CELL_connect.h"   // Pendant -> Cellular communication
+#include "RFID_connect.h"   // Ring -> Pendent RFID communication
+
+Preferences* prefs = Preferences::getInstance();
 
 CELLConnect::CELLConnect() {
     // Constructor code here (if necessary)
@@ -21,5 +28,5 @@ void CELLConnect::makeCall() {
 
 void sendCELLTrigger(std::string TriggerInfo){
     // sends proper cell trigger 
-    std::string AppMsg = checkPreferencesCELL(TriggerInfo); // this needs to reply with something prob
+    std::string AppMsg = prefs->checkPreferencesCELL(TriggerInfo); // this needs to reply with something prob
 }

@@ -25,7 +25,7 @@ static const std::vector<std::string> CELLPreferences = {
 };
 
 // on main init this will load all the stored preferences. 
-Preferences::Preferences() {
+void Preferences::InitPreferences() {
     // Initialize NVS
     esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {

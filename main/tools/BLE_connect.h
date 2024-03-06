@@ -1,6 +1,13 @@
 #ifndef BLE_CONNECT_H
 #define BLE_CONNECT_H
 
+#include <BLEDevice.h>
+#include <BLEServer.h>
+#include <BLEUtils.h>
+#include <BLE2902.h>
+#include <string>
+
+
 // #include <BLEDevice.h>
 // #include <BLEUtils.h>
 // #include <BLEServer.h>

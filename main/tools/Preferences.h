@@ -1,12 +1,30 @@
 #ifndef PREFERENCES_H
 #define PREFERENCES_H
 
-#include <stdlib.h>
+#include <vector>
 #include <string>
 
 class Preferences {
+private:
+    static Preferences* instance; // Static instance pointer
+    // Other private members...
+
+    Preferences() {} // Private constructor to prevent external instantiation
+
 public:
-    Preferences();
+    // Deleted copy constructor and assignment operator to enforce singleton property
+    Preferences(const Preferences&) = delete;
+    Preferences& operator=(const Preferences&) = delete;
+
+    // Static method to access the singleton instance
+    static Preferences* getInstance() {
+        if (instance == nullptr) {
+            instance = new Preferences();
+        }
+        return instance;
+    }
+    
+    void InitPreferences();
     void loadPreferences();
     void savePreferences();
     void updatePreferences();
@@ -14,5 +32,7 @@ public:
     std::string checkPreferencesBT(const std::string& Trigger, int num_trigs);
     void checkPreferencesCELL(const std::string& Trigger);
 };
+
+Preferences* Preferences::instance = nullptr;
 
 #endif

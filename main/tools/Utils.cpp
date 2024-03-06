@@ -1,9 +1,10 @@
 // UTIL.c
-#include "UTIL.h"
+#include "Utils.h"
 #include <stdlib.h>
 #include <stddef.h>
 #include <stdbool.h>
-#include "BluetoothSerial.h"
+#include <BluetoothSerial.h>
+#include <Arduino.h>
 
 BluetoothSerial ESP_BT;
 

@@ -1,3 +1,14 @@
+## 🔵: Currently Working On
+- Preferences storing and updating 
+
+## 🔴: Bugs/Issues
+- Ensuring total code stays within flash size of esp
+
+## 🟡: Other Concerns
+- Need to communicate on how serialization will work with preferences and what our different prefernces mean and how they will change triggers. 
+
+
+
 Project Structure:
 
 1. Main Module (Main.ino)

@@ -6,7 +6,7 @@
 
 ## 🟡: Other Concerns
 - Need to communicate on how serialization will work with preferences and what our different prefernces mean and how they will change triggers.
-- Ensuring all functions see the same class instance of the helper functions
+- Ensuring all functions see the same class instance of the helper functions (most likely perferences.cpp need static and rest dont need to share state)
 
 
 

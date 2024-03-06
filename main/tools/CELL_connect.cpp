@@ -1,6 +1,7 @@
 #include "CELL_connect.h"
 #include <stdlib.h>
 #include <string>
+#include <Preferences.h>
 
 CELLConnect::CELLConnect() {
     // Constructor code here (if necessary)
@@ -20,4 +21,5 @@ void CELLConnect::makeCall() {
 
 void sendCELLTrigger(std::string TriggerInfo){
     // sends proper cell trigger 
+    std::string AppMsg = checkPreferencesCELL(TriggerInfo); // this needs to reply with something prob
 }

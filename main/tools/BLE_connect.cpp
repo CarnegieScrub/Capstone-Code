@@ -37,9 +37,13 @@ class MyCallbacks: public BLECharacteristicCallbacks {
         if (rxValue.length() > 0) {
             Serial.println("Received Value: ");
             for (int i = 0; i < rxValue.length(); i++)
+                // store this in an array
                 Serial.print(rxValue[i]);
 
             Serial.println();
+
+            // IE if arrayval = "updatePref" call update pref
+            // ie arrayval = "ACK BIT" send confirmation code
         }
     }
 };
@@ -101,9 +105,9 @@ void BLEConnect::handleConnection() {
 
 void BLEConnect::sendBLETrigger(std::string TriggerInfo) {
     if(deviceConnected){
-        std::string AppMsg = checkPreferencesBT(TriggerInfo); // this needs to reply with something prob
-        pCharacteristic->setValue(AppMsg.c_str());
+        // get serialize message for 
+        pCharacteristic->setValue(TriggerInfo.c_str());
         pCharacteristic->notify();
-    } else switchToCell(); // if device disconnected after check send over cell?
+    } else sendCELLTrigger(TriggerInfo); // if device disconnected after check send over cell?
     // Sends trigger information to the mobile app when an RFID event is detected
 }

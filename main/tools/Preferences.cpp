@@ -21,6 +21,7 @@ static const std::vector<std::string> CELLPreferences = {
     "pref3",
 };
 
+// on main init this will load all the stored preferences. 
 Preferences::Preferences() {
     // Initialize NVS
     esp_err_t ret = nvs_flash_init();
@@ -31,6 +32,7 @@ Preferences::Preferences() {
     ESP_ERROR_CHECK(ret);
 }
 
+// loads preference key value from storage into retVal 
 void Preferences::loadPreferences(const std::string& preference, std::string& retVal) {
     // Load preferences from storage
     nvs_handle_t my_handle;
@@ -53,14 +55,24 @@ void Preferences::savePreferences(const std::string& preference, const std::stri
     nvs_close(my_handle);
 }
 
-std::string Preferences::checkPreferencesBT(std::string TriggerInfo) {
-    //
-    // Check and return proper trigger info for Bluetooth based on preferences
-    for (string in ALLPreferences):
+std::vector<std::string> parseTriggerInfo(const std::string& Trigger){
+    // will return a tuple, ["call" or "text", phone_number, message_data?]
 
-    loadPreferences(..);
+    
+    
 }
 
-void Preferences::checkPreferencesCELL() {
+void Preferences::checkPreferencesCELL(const std::string& Trigger) {
+
+    std::vector<std::string> RetArr = parseTriggerInfo(const std::string& Trigger);
+    if(RetArr[0] == "call"){
+        // call 
+        int number = RetArr[1];
+        std::string msg = RetArr[2];
+        // make call with message????????
+
+    } else {
+        // text
+    }
     // Check and return proper trigger info for Cellular based on preferences
 }

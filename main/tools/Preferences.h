@@ -10,8 +10,9 @@ public:
     void loadPreferences();
     void savePreferences();
     void updatePreferences();
+    std::vector<std::string> parseTriggerInfo(const std::string& Trigger);
     std::string checkPreferencesBT(const std::string& Trigger, int num_trigs);
-    void checkPreferencesCELL();
+    void checkPreferencesCELL(const std::string& Trigger);
 };
 
 #endif

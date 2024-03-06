@@ -6,10 +6,10 @@ void RFIDConnect::initializeRFID() {
     // Set up RFID hardware
 }
 
-void RFIDConnect::checkForTag() {
+bool RFIDConnect::checkForTag() {
     // Poll for new tags or button press events
 }
 
-void RFIDConnect::triggeredCommunication() {
+std::string RFIDConnect::triggeredCommunication() {
     // Parse triggers from checkForTag and manage communication
 }

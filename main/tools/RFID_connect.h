@@ -5,8 +5,8 @@ class RFIDConnect {
 public:
     RFIDConnect();
     void initializeRFID();
-    void checkForTag();
-    void triggeredCommunication();
+    bool checkForTag();
+    std::string triggeredCommunication();
 };
 
 #endif

@@ -5,7 +5,8 @@
 - Ensuring total code stays within flash size of esp
 
 ## 🟡: Other Concerns
-- Need to communicate on how serialization will work with preferences and what our different prefernces mean and how they will change triggers. 
+- Need to communicate on how serialization will work with preferences and what our different prefernces mean and how they will change triggers.
+- Ensuring all functions see the same class instance of the helper functions
 
 
 

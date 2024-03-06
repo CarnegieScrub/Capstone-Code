@@ -1,4 +1,14 @@
-# Guardian - Discree Personal Safety Wearable
+# Guardian - Discreet Personal Safety Wearable
+
+---
+## 🟢: Confirmed Design Choice
+---
+## 🟡: Needs approval 
+---
+## 🔴: Undiscussed important issues 
+🛰️ur mom
+
+
 
 ## Overview
 

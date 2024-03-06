@@ -1,4 +1,5 @@
 #include "RFID_connect.h"
+#include <string>
 
 RFIDConnect::RFIDConnect() {}
 

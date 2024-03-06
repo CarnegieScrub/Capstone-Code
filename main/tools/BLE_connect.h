@@ -12,6 +12,6 @@ public:
     bool isBTEConnected();
     void handleConnection();
     void sendBLETrigger(std::string TriggerInfo);
-};
+};         
 
 #endif // BLE_CONNECT_H

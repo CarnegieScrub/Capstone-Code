@@ -5,6 +5,9 @@
 #include <stddef.h>
 #include <stdbool.h>
 
+// this file is completely wrong and will probably be wiped and completely re-
+// written
+
 typedef enum {
     PERIPHERAL_BT,
     PERIPHERAL_CELL,

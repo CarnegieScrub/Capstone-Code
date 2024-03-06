@@ -7,6 +7,9 @@
 
 BluetoothSerial ESP_BT;
 
+// this file is completely wrong and will probably be wiped and completely re-
+// written
+
 void util_setup_peripheral(PeripheralType type) {
   switch (type) {
         case PERIPHERAL_CELL:

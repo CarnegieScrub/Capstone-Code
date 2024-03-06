@@ -3,18 +3,21 @@
 #include "nvs.h"
 #include "vector"
 
+// string array for names of all preferences (ie both cell and BT have it)
 static const std::vector<std::string> ALLPreferences = {
     "allpref1",
     "pref2",
     "pref3",
 };
 
+// preferences just for BT
 static const std::vector<std::string> BTPreferences = {
     "BTpref1",
     "pref2",
     "pref3",
 };
 
+// preferences just for cell
 static const std::vector<std::string> CELLPreferences = {
     "CELLpref1",
     "pref2",
@@ -55,10 +58,10 @@ void Preferences::savePreferences(const std::string& preference, const std::stri
     nvs_close(my_handle);
 }
 
-std::vector<std::string> parseTriggerInfo(const std::string& Trigger){
+std::vector<std::string> parseTriggerInfo(const std::string& Trigger){ // prob should go in util?
     // will return a tuple, ["call" or "text", phone_number, message_data?]
 
-    
+
     
 }
 

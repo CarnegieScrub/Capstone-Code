@@ -25,14 +25,11 @@ public:
     }
     
     void InitPreferences();
-    void loadPreferences();
-    void savePreferences();
-    void updatePreferences();
+    void loadPreferences(const std::string& preference, const std::string& prefval);
+    void savePreferences(const std::string& preference, const std::string& prefval);
     std::vector<std::string> parseTriggerInfo(const std::string& Trigger);
     std::string checkPreferencesBT(const std::string& Trigger, int num_trigs);
     void checkPreferencesCELL(const std::string& Trigger);
 };
-
-Preferences* Preferences::instance = nullptr;
 
 #endif

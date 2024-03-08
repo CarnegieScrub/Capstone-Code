@@ -5,9 +5,10 @@
 
 // string array for names of all preferences (ie both cell and BT have it)
 static const std::vector<std::string> ALLPreferences = {
-    "allpref1",
-    "pref2",
-    "pref3",
+    "SOS1",
+    "SOS2",
+    "SOS3",
+    "911",
 };
 
 // preferences just for BT
@@ -36,17 +37,27 @@ void Preferences::InitPreferences() {
 }
 
 // loads preference key value from storage into retVal 
-void Preferences::loadPreferences(const std::string& preference, std::string& retVal) {
-    // Load preferences from storage
+bool loadPreference(const std::string& key, std::string& value) {
     nvs_handle_t my_handle;
-    ESP_ERROR_CHECK(nvs_open("storage", NVS_READONLY, &my_handle));
+    esp_err_t err;
     size_t required_size;
-    ESP_ERROR_CHECK(nvs_get_str(my_handle, preference, NULL, &required_size));
-    char* phone_buf = new char[required_size];
-    ESP_ERROR_CHECK(nvs_get_str(my_handle, preference, phone_buf, &required_size));
-    retVal = std::string(phone_buf);
-    delete[] phone_buf;
+    err = nvs_open("storage", NVS_READONLY, &my_handle);
+    if (err != ESP_OK) return false;
+
+    err = nvs_get_str(my_handle, key.c_str(), nullptr, &required_size);
+    if (err != ESP_OK) {
+        nvs_close(my_handle);
+        return false;
+    }
+
+    char* buf = new char[required_size];
+    err = nvs_get_str(my_handle, key.c_str(), buf, &required_size);
+    if (err == ESP_OK) {
+        value.assign(buf, required_size - 1);
+    }
+    delete[] buf;
     nvs_close(my_handle);
+    return err == ESP_OK;
 }
 
 void Preferences::savePreferences(const std::string& preference, const std::string& prefval) {

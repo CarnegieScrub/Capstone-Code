@@ -19,6 +19,13 @@ long lastMsgTime = 0; // To keep track of the last message time
 #define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
 #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
+Preferences* prefs = Preferences::getInstance();
+
+// Implement the static method to get the instance
+BluetoothManager& BluetoothManager::getInstance() {
+    static BluetoothManager instance; // Guaranteed to be created only once
+    return instance;
+}
 
 // This sets connection status
 class MyServerCallbacks: public BLEServerCallbacks {
@@ -33,32 +40,38 @@ class MyServerCallbacks: public BLEServerCallbacks {
     }
 };
 
-// This function recieves messages from Mobile APP
-// Define the characteristic callback class 
-// THIS CAN CALL UPDATE PREFERENCES ON ITS OWN!!!!!
+/* This function recieves messages from Mobile APP
+* Define the characteristic callback class 
+* set the rxValue.find to different values and (19) is
+* start of substring 
+*/ 
 class MyCallbacks: public BLECharacteristicCallbacks {
-    void onWrite(BLECharacteristic *pCharacteristic) {
+    void onWrite(BLECharacteristic *pCharacteristic) override {
         std::string rxValue = pCharacteristic->getValue();
-
         if (rxValue.length() > 0) {
-            Serial.println("Received Value: ");
-            for (int i = 0; i < rxValue.length(); i++)
-                // store this in an array
-                Serial.print(rxValue[i]);
-
-            Serial.println();
-
-            // IE if arrayval = "updatePref" call update pref
-            // ie arrayval = "ACK BIT" send confirmation code
+            Serial.println("Received Value: " + String(rxValue.c_str()));
+            if (rxValue.find("preferences update SOS1") == 0) {
+                std::string value = rxValue.substr(19);
+                prefs->savePreferences("SOS1", value);
+                Serial.println("SOS1 Preference saved: " + String(value.c_str()));
+            } else if (rxValue.find("preferences update SOS2") == 0) {
+                std::string value = rxValue.substr(19);
+                prefs->savePreferences("SOS2", value);
+                Serial.println("SOS2 Preference saved: " + String(value.c_str()));
+            } else if (rxValue.find("preferences update SOS3") == 0) {
+                std::string value = rxValue.substr(19);
+                prefs->savePreferences("SOS3", value);
+                Serial.println("SOS3 Preference saved: " + String(value.c_str()));
+            }
         }
     }
 };
 
-BLEConnect::BLEConnect() {
-    // Constructor code here (if necessary)
-}
+// BLEConnect::BLEConnect() {
+//     // Constructor code here (if necessary prob not)
+// }
 
-void BLEConnect::initializeBLE() {
+void BluetoothManager::initializeBLE() {
     // Sets up BLE advertisement and service characteristics
     Serial.begin(115200);
     BLEDevice::init("ESP32");
@@ -90,11 +103,11 @@ void BLEConnect::initializeBLE() {
     Serial.println("Waiting a client connection to notify...");
 }
 
-bool BLEConnect::isBTEConnected() {
+bool BluetoothManager::isBTEConnected() {
     return deviceConnected; // updated by connection callback
 }
 
-void BLEConnect::handleConnection() {
+void BluetoothManager::handleConnection() {
     // Check for connection/disconnection
     if (!deviceConnected && oldDeviceConnected) {
         delay(500); // give the BLE stack the chance to get things ready
@@ -109,9 +122,9 @@ void BLEConnect::handleConnection() {
 }
 
 
-void BLEConnect::sendBLETrigger(std::string TriggerInfo) {
+void BluetoothManager::sendBLETrigger(std::string TriggerInfo) {
     if(deviceConnected){
-        // get serialize message for 
+        // get serialize message for trigger and send back to app
         pCharacteristic->setValue(TriggerInfo.c_str());
         pCharacteristic->notify();
     } else sendCELLTrigger(TriggerInfo); // if device disconnected after check send over cell?

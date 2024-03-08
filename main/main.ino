@@ -10,7 +10,7 @@
 // before compiling remove from tools/ directory. 
 CPU myCPU;
 Preferences myPref;
-BLEConnect BLE;
+BluetoothManager* BLE = BLEConnect::getInstance();
 CELLConnect Cell;
 RFIDConnect RFID;
 Preferences* prefs = Preferences::getInstance();
@@ -18,7 +18,7 @@ Preferences* prefs = Preferences::getInstance();
 void initSystem() {
 
   myCPU.initializeCPU();   // CPU.h initialize esp32 as CPU controller (battery, GPIO, UART etc comms between devices) 
-  BLE.initializeBLE();   // BLE_connect.h Initialize Bluetooth connection
+  BLE->initializeBLE();   // BLE_connect.h Initialize Bluetooth connection
   prefs->InitPreferences();  // Prefences.h Initialize Prefences and sets/store proper data from app
   Cell.initializeCellular();  // CELL_connect.h Initialize Cellular setup
   RFID.initializeRFID();  // RFID_connect.h Initialize RFID setup 

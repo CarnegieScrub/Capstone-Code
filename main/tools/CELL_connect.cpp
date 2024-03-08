@@ -10,23 +10,30 @@
 
 Preferences* prefs = Preferences::getInstance();
 
-CELLConnect::CELLConnect() {
+CellularManager::CellularManager() {
     // Constructor code here (if necessary)
 }
 
-void CELLConnect::initializeCellular() {
+static Preferences* getInstance() {
+        if (instance == nullptr) {
+            instance = new Preferences();
+        }
+        return instance;
+    }
+
+void CellularManager::initializeCellular() {
     // Establishes a cellular connection
 }
 
-void CELLConnect::sendSMS() {
+void CellularManager::sendSMS() {
     // Sends an SMS message to pre-configured emergency contacts
 }
 
-void CELLConnect::makeCall() {
+void CellularManager::makeCall() {
     // Initiates a voice call to a pre-configured emergency contact
 }
 
-void sendCELLTrigger(std::string TriggerInfo){
+void CellularManager::sendCELLTrigger(std::string TriggerInfo){
     // sends proper cell trigger 
     std::string AppMsg = prefs->checkPreferencesCELL(TriggerInfo); // this needs to reply with something prob
 }

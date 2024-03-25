@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'src/emergency_contact.dart';
 import 'src/pickContacts.dart';
 import 'src/trigger_preferences.dart';
+import 'src/bluetooth.dart';
 
 
 //Logo from here: https://clipart-library.com/clipart/8TG64o7qc.htm
@@ -59,6 +60,19 @@ class MyHomePage extends StatelessWidget {
               child:  const Text('Set Trigger Preferences'),
               ),
             ),
+            const SizedBox( width: 250, height: 20),
+            SizedBox( width: 250, height: 50,
+              child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>  FlutterBlueApp()),
+                );
+              },
+              child:  const Text('Connect to Bluetooth'),
+              ),
+            )
+
             
           ],
         ),

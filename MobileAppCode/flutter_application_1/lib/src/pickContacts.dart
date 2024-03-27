@@ -40,11 +40,17 @@ class PickContactsPage extends StatelessWidget {
           },
           child: const Text('Set Contact 3'),
         ),
-            ElevatedButton(
+        ElevatedButton(
           onPressed: () {
             Navigator.pop(context);
           },
           child: const Text('Go back!'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Send Test Phone Number'),
         ),
 
           ]

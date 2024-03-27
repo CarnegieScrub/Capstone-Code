@@ -75,7 +75,20 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> {
     _adapterStateStateSubscription.cancel();
     super.dispose();
   }
-
+  void sendData(BluetoothCharacteristic characteristic, List<int> data) {
+    characteristic.write(data);
+  }
+  void writeCharacteristic(BluetoothDevice device, Guid characteristicId, List<int> data) async {
+  List<BluetoothService> services = await device.discoverServices();
+  for (BluetoothService service in services) {
+    for (BluetoothCharacteristic characteristic in service.characteristics) {
+      if (characteristic.uuid == characteristicId) {
+        await characteristic.write(data);
+        print('Data written successfully.');
+      }
+    }
+  }
+}
   @override
   Widget build(BuildContext context) {
     Widget screen = _adapterState == BluetoothAdapterState.on
@@ -98,6 +111,32 @@ class BluetoothAdapterStateObserver extends NavigatorObserver {
 
   @override
   void didPush(Route route, Route? previousRoute) {
+    super.didPush(route, previousRoute);
+    if (route.settings.name == '/DeviceScreen') {
+      // Start listening to Bluetooth state changes when a new route is pushed
+      _adapterStateSubscription ??= FlutterBluePlus.adapterState.listen((state) {
+        if (state != BluetoothAdapterState.on) {
+          // Pop the current route if Bluetooth is off
+          navigator?.pop();
+        }
+      });
+    }
+  }
+
+  @override
+  void didPop(Route route, Route? previousRoute) {
+    super.didPop(route, previousRoute);
+    // Cancel the subscription when the route is popped
+    _adapterStateSubscription?.cancel();
+    _adapterStateSubscription = null;
+  }
+}
+
+class BluetoothWriteData extends NavigatorObserver {
+  StreamSubscription<BluetoothAdapterState>? _adapterStateSubscription;
+
+  @override
+  void (Route route, Route? previousRoute) {
     super.didPush(route, previousRoute);
     if (route.settings.name == '/DeviceScreen') {
       // Start listening to Bluetooth state changes when a new route is pushed
